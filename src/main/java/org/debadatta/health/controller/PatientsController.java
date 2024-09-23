@@ -31,6 +31,18 @@ public class PatientsController {
         return patientsService.createPatients(patients);
     }
 
+    @GetMapping("/get/patients")
+    public ResponseEntity<List<Patients>> getAllpatients() {
+        List<Patients> patients = patientsService.getAllPatients();
+        return ResponseEntity.ok(patients);
+    }
+
+    @GetMapping("/patients/{p_id}")
+    public ResponseEntity<Patients> getPatientsById(@PathVariable String p_id) {
+        Patients patients = patientsService.getPatientsById(p_id);
+        return ResponseEntity.ok(patients);
+    }
+
     @GetMapping("/doctors/{specialization}")
     public ResponseEntity<List<Doctors>> getDoctorsBySpecialization(@PathVariable String specialization) {
         List<Doctors> ds = patientsService.getDoctorsBySpecialization(specialization);
