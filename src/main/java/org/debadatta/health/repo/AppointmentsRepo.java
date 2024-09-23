@@ -1,8 +1,18 @@
 package org.debadatta.health.repo;
 
 import org.debadatta.health.model.Appointments;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-public interface AppointmentsRepo extends JpaRepository<Appointments, Integer> {
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+
+import lombok.AllArgsConstructor;
+
+@Repository
+@AllArgsConstructor
+public class AppointmentsRepo {
+
+    @Autowired
+    final private DynamoDBMapper dynamoDBMapper;
 
 }
