@@ -22,6 +22,15 @@ public class DoctorsService {
         return doctorsRepo.createDoctors(doctors);
     }
 
+    public List<Doctors> getAllDoctors() {
+        return doctorsRepo.getAllDoctors();
+    }
+
+    public Doctors getDoctorsById(String d_id) {
+        return doctorsRepo.getDoctorsById(d_id);
+
+    }
+
     public List<Patients> getPatientsByDisease(String disease) {
         return doctorsRepo.getPatientsByDisease(disease);
     }

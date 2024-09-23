@@ -28,6 +28,14 @@ public class DoctorsRepo {
         return null;
     }
 
+    public List<Doctors> getAllDoctors() {
+        return dynamoDBMapper.scan(Doctors.class, new DynamoDBScanExpression());
+    }
+
+    public Doctors getDoctorsById(String d_id) {
+        return dynamoDBMapper.load(Doctors.class, d_id);
+    }
+
     public List<Patients> getPatientsByDisease(String disease) {
         Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":disease", new AttributeValue().withS(disease));
