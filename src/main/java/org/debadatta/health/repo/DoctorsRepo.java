@@ -32,7 +32,7 @@ public class DoctorsRepo {
         return dynamoDBMapper.scan(Doctors.class, new DynamoDBScanExpression());
     }
 
-    public Doctors getDoctorsById(String d_id) {
+    public Doctors getDoctorsById(int d_id) {
         return dynamoDBMapper.load(Doctors.class, d_id);
     }
 
@@ -54,7 +54,7 @@ public class DoctorsRepo {
         load.setAge(doctors.getAge());
         load.setSpecialization(doctors.getSpecialization());
         load.setExperience(doctors.getExperience());
-        load.setAvailability(doctors.getAvailability());
+        load.setAvailability(doctors.getAvailabilty());
         dynamoDBMapper.save(load);
 
         return dynamoDBMapper.load(Doctors.class, d_id);

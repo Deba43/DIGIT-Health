@@ -15,4 +15,8 @@ public class AppointmentsRepo {
     @Autowired
     final private DynamoDBMapper dynamoDBMapper;
 
+    public void save(Appointments appointments) {
+        dynamoDBMapper.save(appointments);
+    }
+
 }

@@ -39,7 +39,7 @@ public class DoctorsController {
     }
 
     @GetMapping("/doctors/{d_id}")
-    public ResponseEntity<Doctors> getDoctorsById(@PathVariable String d_id) {
+    public ResponseEntity<Doctors> getDoctorsById(@PathVariable int d_id) {
         Doctors doctors = doctorsService.getDoctorsById(d_id);
         if (doctors != null) {
             return ResponseEntity.ok(doctors);

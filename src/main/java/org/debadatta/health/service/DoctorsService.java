@@ -26,7 +26,7 @@ public class DoctorsService {
         return doctorsRepo.getAllDoctors();
     }
 
-    public Doctors getDoctorsById(String d_id) {
+    public Doctors getDoctorsById(int d_id) {
         return doctorsRepo.getDoctorsById(d_id);
 
     }
