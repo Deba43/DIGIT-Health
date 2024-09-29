@@ -2,6 +2,7 @@ package org.debadatta.health.service;
 
 import org.debadatta.health.model.Appointments;
 import org.debadatta.health.model.Doctors;
+import java.util.Date;
 import org.debadatta.health.repo.AppointmentsRepo;
 import org.debadatta.health.repo.DoctorsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ public class AppointmentsService {
     @Autowired
     private DoctorsRepo doctorsRepo;
 
-    @PostMapping("/book")
     public boolean bookAppointment(Appointments appointments) {
         Doctors doctor = doctorsRepo.getDoctorsById(appointments.getDoctorId());
 
@@ -32,7 +32,6 @@ public class AppointmentsService {
         } else {
             return false;
         }
-
     }
 
 }
