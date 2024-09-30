@@ -40,10 +40,10 @@ public class AppointmentsController {
 
     // updateAppointment
     @PutMapping("/reschedule{a_id}")
-    public ResponseEntity<String> upadteAppointment(@PathVariable String a_id,
+    public ResponseEntity<String> upadteAppointment(@PathVariable int a_id,
             @RequestBody Appointments updatedAppointment) {
 
-        boolean isUpdated = appointmentsService.updateAppointments(a_id, updatedAppointment);
+        boolean isUpdated = appointmentsService.updateAppointment(a_id, updatedAppointment);
 
         if (isUpdated) {
             return ResponseEntity.ok("Appointment rescheduled successfully");

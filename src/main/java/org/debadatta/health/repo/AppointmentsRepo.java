@@ -19,4 +19,8 @@ public class AppointmentsRepo {
         dynamoDBMapper.save(appointments);
     }
 
+    public Appointments getAppointmentById(int a_id){
+        return dynamoDBMapper.load(Appointments.class, a_id);
+    }
+
 }

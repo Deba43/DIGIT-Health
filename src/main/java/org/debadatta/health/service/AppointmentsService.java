@@ -34,4 +34,27 @@ public class AppointmentsService {
         }
     }
 
+    public boolean updateAppointment(int a_id, Appointments updatedAppointments) {
+
+        Appointments existingAppointment = appointmentsRepo.getAppointmentById(a_id);
+        if (existingAppointment == null)
+            return false;
+
+        Doctors doctor = doctorsRepo.getDoctorsById(updatedAppointments.getDoctorId());
+
+        if (doctor != null && doctor.isAvailable(updatedAppointments.getAppointmentDate(),
+                updatedAppointments.getAppointmentTime())) {
+
+            existingAppointment.setAppointmentDate(updatedAppointments.getAppointmentDate());
+            existingAppointment.setAppiontmentTime(updatedAppointments.getAppointmentTime());
+            existingAppointment.setStatus("Rescheduled");
+
+            appointmentsRepo.save(existingAppointment);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
