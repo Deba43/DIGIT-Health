@@ -55,6 +55,7 @@ public class AppointmentsController {
 
     // getAllAppointments
     // getAppointmentById
+    
 
     // cancelAppointment
     // getAppointmentByPatientId
