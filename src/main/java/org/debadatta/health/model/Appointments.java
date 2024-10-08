@@ -30,9 +30,9 @@ public class Appointments {
     @DynamoDBHashKey
     private int a_id;
     @DynamoDBAttribute
-    private int p_id;
+    private String p_id;
     @DynamoDBAttribute
-    private int d_id;
+    private String d_id;
     @DynamoDBAttribute
     private Date a_date;
     @DynamoDBAttribute
@@ -48,19 +48,19 @@ public class Appointments {
         this.a_id = a_id;
     }
 
-    public int getPatientId() {
+    public String getPatientId() {
         return p_id;
     }
 
-    public void setPatientId(int p_id) {
+    public void setPatientId(String p_id) {
         this.p_id = p_id;
     }
 
-    public int getDoctorId() {
+    public String getDoctorId() {
         return d_id;
     }
 
-    public void setDoctorId(int d_id) {
+    public void setDoctorId(String d_id) {
         this.d_id = d_id;
     }
 

@@ -25,14 +25,14 @@ public class DoctorsRepo {
     public String createDoctors(Doctors doctors) {
 
         dynamoDBMapper.save(doctors);
-        return null;
+        return doctors.getId();
     }
 
     public List<Doctors> getAllDoctors() {
         return dynamoDBMapper.scan(Doctors.class, new DynamoDBScanExpression());
     }
 
-    public Doctors getDoctorsById(int d_id) {
+    public Doctors getDoctorsById(String d_id) {
         return dynamoDBMapper.load(Doctors.class, d_id);
     }
 
