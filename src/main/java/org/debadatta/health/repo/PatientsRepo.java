@@ -24,7 +24,7 @@ public class PatientsRepo {
 
     public String createPatients(Patients patients) {
         dynamoDBMapper.save(patients);
-        return patients.getId();
+        return patients.getP_id();
 
     }
 
@@ -54,8 +54,7 @@ public class PatientsRepo {
         load.setDisease(patients.getDisease());
         load.setGender(patients.getGender());
         load.setAddress(patients.getAddress());
-        load.setPhoneNo(patients.getPhoneNo());
-        dynamoDBMapper.save(load);
+        load.setPhone_no(patients.getPhone_no());
 
         return dynamoDBMapper.load(Patients.class, p_id);
 

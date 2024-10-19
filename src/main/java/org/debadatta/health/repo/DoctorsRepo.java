@@ -25,7 +25,7 @@ public class DoctorsRepo {
     public String createDoctors(Doctors doctors) {
 
         dynamoDBMapper.save(doctors);
-        return doctors.getId();
+        return doctors.getD_id();
     }
 
     public List<Doctors> getAllDoctors() {
@@ -54,7 +54,7 @@ public class DoctorsRepo {
         load.setAge(doctors.getAge());
         load.setSpecialization(doctors.getSpecialization());
         load.setExperience(doctors.getExperience());
-        load.setAvailability(doctors.getAvailabilty());
+        load.setAvailability(doctors.getAvailability());
         dynamoDBMapper.save(load);
 
         return dynamoDBMapper.load(Doctors.class, d_id);

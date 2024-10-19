@@ -35,7 +35,7 @@ public class AppointmentsRepo {
     public List<Appointments> fetchAppointmentsByPatientId(String p_id) {
 
         Appointments appointmentKey = new Appointments();
-        appointmentKey.setPatientId(p_id);
+        appointmentKey.setP_id(p_id);
 
         DynamoDBQueryExpression<Appointments> queryExpression = new DynamoDBQueryExpression<Appointments>()
                 .withHashKeyValues(appointmentKey);// Patient Id should be a partition key or use GSI
@@ -47,7 +47,7 @@ public class AppointmentsRepo {
     public List<Appointments> fetchAppointmentsByDoctorId(String d_id) {
 
         Appointments appointmentKey = new Appointments();
-        appointmentKey.setDoctorId(d_id);
+        appointmentKey.setD_id(d_id);
 
         DynamoDBQueryExpression<Appointments> queryExpression = new DynamoDBQueryExpression<Appointments>()
                 .withHashKeyValues(appointmentKey);// doctorId should be a partition key or use GSI

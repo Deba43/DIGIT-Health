@@ -25,10 +25,10 @@ public class AppointmentsService {
     private DoctorsRepo doctorsRepo;
 
     public boolean bookAppointment(Appointments appointments) {
-        Doctors doctor = doctorsRepo.getDoctorsById(appointments.getDoctorId());
+        Doctors doctor = doctorsRepo.getDoctorsById(appointments.getD_id());
 
         if (doctor != null
-                && doctor.isAvailable(appointments.getAppointmentDate(), appointments.getAppointmentTime())) {
+                && doctor.isAvailable(appointments.getA_date(), appointments.getA_time())) {
 
             appointments.setStatus("Booked");
             appointmentsRepo.save(appointments);
@@ -44,13 +44,13 @@ public class AppointmentsService {
         if (existingAppointment == null)
             return false;
 
-        Doctors doctor = doctorsRepo.getDoctorsById(updatedAppointments.getDoctorId());
+        Doctors doctor = doctorsRepo.getDoctorsById(updatedAppointments.getD_id());
 
-        if (doctor != null && doctor.isAvailable(updatedAppointments.getAppointmentDate(),
-                updatedAppointments.getAppointmentTime())) {
+        if (doctor != null && doctor.isAvailable(updatedAppointments.getA_date(),
+                updatedAppointments.getA_time())) {
 
-            existingAppointment.setAppointmentDate(updatedAppointments.getAppointmentDate());
-            existingAppointment.setAppiontmentTime(updatedAppointments.getAppointmentTime());
+            existingAppointment.setA_date(updatedAppointments.getA_date());
+            existingAppointment.setA_time(updatedAppointments.getA_time());
             existingAppointment.setStatus("Rescheduled");
 
             appointmentsRepo.save(existingAppointment);
