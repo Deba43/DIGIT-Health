@@ -1,10 +1,6 @@
 package org.debadatta.health.controller;
 
 import org.debadatta.health.model.Appointments;
-import org.debadatta.health.model.Doctors;
-import org.debadatta.health.model.Patients;
-
-import java.util.Date;
 import java.util.List;
 
 import org.debadatta.health.service.AppointmentsService;
@@ -45,7 +41,7 @@ public class AppointmentsController {
     }
 
     // updateAppointment
-    @PutMapping("/reschedule{a_id}")
+    @PutMapping("/reschedule/{a_id}")
     public ResponseEntity<String> updateAppointment(@PathVariable int a_id,
             @RequestBody Appointments updatedAppointment) {
 
@@ -61,7 +57,7 @@ public class AppointmentsController {
 
     // cancelAppointment
 
-    @DeleteMapping("/cancel/appointments{a_id}")
+    @DeleteMapping("/cancelAppointments/{a_id}")
     public ResponseEntity<String> cancelAppointment(@PathVariable int a_id) {
 
         boolean isCancel = appointmentsService.cancelAppointment(a_id);
@@ -75,7 +71,7 @@ public class AppointmentsController {
     }
 
     // getAppointmentByPatientId
-    @GetMapping("/getAppointmentByPatientId{p_id}")
+    @GetMapping("/getAppointmentByPatientId/{p_id}")
     public ResponseEntity<List<Appointments>> getAppointmentByPatientId(@PathVariable String p_id) {
 
         List<Appointments> appointments = appointmentsService.getAppointmentByPatientId(p_id);
@@ -90,7 +86,7 @@ public class AppointmentsController {
 
     // getAppointmentByDoctorId
 
-    @GetMapping("/getAppointmentByDoctorId{d_id}")
+    @GetMapping("/getAppointmentByDoctorId/{d_id}")
     public ResponseEntity<List<Appointments>> getAppointmentByDoctorId(@PathVariable String d_id) {
 
         List<Appointments> appointments = appointmentsService.getAppointmentByDoctorId(d_id);
@@ -117,7 +113,7 @@ public class AppointmentsController {
     }
     // getAppointmentById
 
-    @GetMapping("/{id}")
+    @GetMapping("/getAppointmentById/{id}")
     public ResponseEntity<Appointments> getAppointmentById(@PathVariable int id) {// the id is for the URL path of the
                                                                                   // incoming HTTP request
         Appointments appointment = appointmentsService.getAppointmentById(id);

@@ -26,35 +26,35 @@ public class PatientsController {
     @Autowired
     private PatientsService patientsService;
 
-    @PostMapping("/patients")
+    @PostMapping("/createPatients")
     public String createPatients(@RequestBody Patients patients) {
         return patientsService.createPatients(patients);
     }
 
-    @GetMapping("/get/patients")
+    @GetMapping("/getAllpatients")
     public ResponseEntity<List<Patients>> getAllpatients() {
         List<Patients> patients = patientsService.getAllPatients();
         return ResponseEntity.ok(patients);
     }
 
-    @GetMapping("/patients/{p_id}")
+    @GetMapping("/getPatientsById/{p_id}")
     public ResponseEntity<Patients> getPatientsById(@PathVariable String p_id) {
         Patients patients = patientsService.getPatientsById(p_id);
         return ResponseEntity.ok(patients);
     }
 
-    @GetMapping("/doctors/{specialization}")
+    @GetMapping("/getDoctorsBySpecialization/{specialization}")
     public ResponseEntity<List<Doctors>> getDoctorsBySpecialization(@PathVariable String specialization) {
         List<Doctors> ds = patientsService.getDoctorsBySpecialization(specialization);
         return ResponseEntity.ok(ds);
     }
 
-    @PutMapping("/patients/{p_id}")
+    @PutMapping("/updatePatients/{p_id}")
     public Patients updatePatients(@PathVariable String p_id, @RequestBody Patients patients) {
         return patientsService.updatePatients(p_id, patients);
     }
 
-    @DeleteMapping("/patients/{p_id}")
+    @DeleteMapping("/deletePatients/{p_id}")
     public String deletePatients(@PathVariable String p_id) {
         return patientsService.deletePatients(p_id);
     }
