@@ -40,6 +40,11 @@ public class Doctors {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,}$", message = "Password must contain at least one letter, one number, and one special character")
     private String password;
 
+    @DynamoDBAttribute(attributeName = "phone_no")
+    @NotNull(message = "Mobile Number can't be null")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Mobile Number must be 10 digits")
+    private String phone_no;
+
     @DynamoDBAttribute(attributeName = "age")
     @NotNull(message = "Age can't be null")
     private int age;
@@ -62,7 +67,7 @@ public class Doctors {
     public boolean isAvailable(Date a_date, String a_time) {
 
         if (availability.containsKey(a_date)) {
-            List<String> availableTimes = availability.get(a_time);
+            List<String> availableTimes = availability.get(a_date);
             return availableTimes.contains(a_time);
         }
         return false;

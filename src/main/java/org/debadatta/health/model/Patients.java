@@ -18,7 +18,7 @@ import jakarta.validation.constraints.Pattern;
 @Data
 @NoArgsConstructor
 @Component
-@Scope("prtotype")
+@Scope("prototype")
 @DynamoDBTable(tableName = "Patients")
 
 public class Patients {
@@ -54,6 +54,7 @@ public class Patients {
 
     @DynamoDBAttribute(attributeName = "phone_no")
     @NotNull(message = "Mobile Number can't be null")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Mobile Number must be 10 digits")
     private String phone_no;
 
     @DynamoDBAttribute(attributeName = "profilePictureUrl")
