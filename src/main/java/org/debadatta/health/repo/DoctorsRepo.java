@@ -47,15 +47,21 @@ public class DoctorsRepo {
         return dynamoDBMapper.scan(Patients.class, scanExpression);
     }
 
-    public Doctors updateDoctors(String d_id, Doctors doctors) {
+    public Doctors updateDoctors(String d_id, Doctors doctor) {
 
-        Doctors load = dynamoDBMapper.load(Doctors.class, d_id);
-        load.setName(doctors.getName());
-        load.setAge(doctors.getAge());
-        load.setSpecialization(doctors.getSpecialization());
-        load.setExperience(doctors.getExperience());
-        load.setAvailability(doctors.getAvailability());
-        dynamoDBMapper.save(load);
+        Doctors existingDoctor = dynamoDBMapper.load(Doctors.class, d_id);
+        if (doctor.getName() != null)
+            existingDoctor.setName(doctor.getName());
+        if (doctor.getAge() != 0)
+            existingDoctor.setAge(doctor.getAge());
+        if (doctor.getSpecialization() != null)
+            existingDoctor.setSpecialization(doctor.getSpecialization());
+        if (doctor.getExperience() != 0)
+            existingDoctor.setExperience(doctor.getExperience());
+        if (doctor.getAvailability() != null)
+            existingDoctor.setAvailability(doctor.getAvailability());
+
+        dynamoDBMapper.save(existingDoctor);
 
         return dynamoDBMapper.load(Doctors.class, d_id);
 
