@@ -21,14 +21,6 @@ public class PatientsService {
         return patientsRepo.createPatients(patients);
     }
 
-    public List<Patients> getAllPatients() {
-        return patientsRepo.getAllPatients();
-    }
-
-    public Patients getPatientsById(String p_id) {
-        return patientsRepo.getPatientsById(p_id);
-    }
-
     public List<Doctors> getDoctorsBySpecialization(String specialization) {
         return patientsRepo.getDoctorsBySpecialization(specialization);
     }

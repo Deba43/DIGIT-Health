@@ -11,7 +11,6 @@ import org.debadatta.health.repo.AppointmentsRepo;
 import org.debadatta.health.repo.DoctorsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.AllArgsConstructor;
 

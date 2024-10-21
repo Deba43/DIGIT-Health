@@ -28,10 +28,6 @@ public class DoctorsRepo {
         return doctors.getD_id();
     }
 
-    public List<Doctors> getAllDoctors() {
-        return dynamoDBMapper.scan(Doctors.class, new DynamoDBScanExpression());
-    }
-
     public Doctors getDoctorsById(String d_id) {
         return dynamoDBMapper.load(Doctors.class, d_id);
     }

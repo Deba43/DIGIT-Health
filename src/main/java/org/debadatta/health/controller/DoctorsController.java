@@ -31,23 +31,6 @@ public class DoctorsController {
         return doctorsService.createDoctors(doctors);
     }
 
-    @GetMapping("/getAllDoctors")
-    public ResponseEntity<List<Doctors>> getAllDoctors() {
-        List<Doctors> doctors = doctorsService.getAllDoctors();
-        return ResponseEntity.ok(doctors);
-
-    }
-
-    @GetMapping("/getDoctorsById/{d_id}")
-    public ResponseEntity<Doctors> getDoctorsById(@PathVariable String d_id) {
-        Doctors doctors = doctorsService.getDoctorsById(d_id);
-        if (doctors != null) {
-            return ResponseEntity.ok(doctors);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-
-    }
 
     @GetMapping("/getPatientsByDisease/{disease}")
     public ResponseEntity<List<Patients>> getPatientsByDisease(@PathVariable String disease) {

@@ -3,7 +3,6 @@ package org.debadatta.health.repo;
 import java.util.List;
 
 import org.debadatta.health.model.Appointments;
-import org.debadatta.health.model.Patients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
