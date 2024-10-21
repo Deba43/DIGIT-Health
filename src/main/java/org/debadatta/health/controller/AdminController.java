@@ -2,6 +2,7 @@ package org.debadatta.health.controller;
 
 import java.util.List;
 
+import org.debadatta.health.model.Appointments;
 import org.debadatta.health.model.Doctors;
 import org.debadatta.health.model.Patients;
 import org.debadatta.health.service.AdminService;
@@ -50,6 +51,55 @@ public class AdminController {
         List<Doctors> doctors = adminService.getAllDoctors();
         return ResponseEntity.ok(doctors);
 
+    }
+
+    @GetMapping("/getAllAppointment")
+    public ResponseEntity<List<Appointments>> getAllAppointments() {
+        List<Appointments> appointments = adminService.getAllAppointments();
+
+        if (appointments != null && !appointments.isEmpty()) {
+            return ResponseEntity.ok(appointments);
+        } else {
+            return ResponseEntity.noContent().build(); // Return 204 if no appointments found
+        }
+    }
+
+    @GetMapping("/getAppointmentByPatientId/{p_id}")
+    public ResponseEntity<List<Appointments>> getAppointmentByPatientId(@PathVariable String p_id) {
+
+        List<Appointments> appointments = adminService.getAppointmentByPatientId(p_id);
+
+        if (appointments != null && !appointments.isEmpty()) {
+            return ResponseEntity.ok(appointments);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
+    @GetMapping("/getAppointmentByDoctorId/{d_id}")
+    public ResponseEntity<List<Appointments>> getAppointmentByDoctorId(@PathVariable String d_id) {
+
+        List<Appointments> appointments = adminService.getAppointmentByDoctorId(d_id);
+
+        if (appointments != null && !appointments.isEmpty()) {
+            return ResponseEntity.ok(appointments);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
+    @GetMapping("/getAppointmentById/{id}")
+    public ResponseEntity<Appointments> getAppointmentById(@PathVariable int id) {// the id is for the URL path of the
+                                                                                  // incoming HTTP request
+        Appointments appointment = adminService.getAppointmentById(id);
+
+        if (appointment != null) {
+            return ResponseEntity.ok(appointment);
+        } else {
+            return ResponseEntity.notFound().build(); // Return 404 if appointment not found
+        }
     }
 
 }

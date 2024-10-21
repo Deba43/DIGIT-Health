@@ -74,23 +74,4 @@ public class AppointmentsService {
         }
 
     }
-
-    public List<Appointments> getAppointmentByPatientId(String p_id) {
-
-        return appointmentsRepo.fetchAppointmentsByPatientId(p_id);
-    }
-
-    public List<Appointments> getAppointmentByDoctorId(String d_id) {
-
-        return appointmentsRepo.fetchAppointmentsByDoctorId(d_id);
-    }
-
-    public List<Appointments> getAllAppointments() {
-        return appointmentsRepo.fetchAllAppointments();
-    }
-
-    public Appointments getAppointmentById(int id) {
-        return appointmentsRepo.fetchAppointmentById(id);
-    }
-
 }

@@ -31,36 +31,4 @@ public class AppointmentsRepo {
         dynamoDBMapper.delete(appointments);
     }
 
-    public List<Appointments> fetchAppointmentsByPatientId(String p_id) {
-
-        Appointments appointmentKey = new Appointments();
-        appointmentKey.setP_id(p_id);
-
-        DynamoDBQueryExpression<Appointments> queryExpression = new DynamoDBQueryExpression<Appointments>()
-                .withHashKeyValues(appointmentKey);// Patient Id should be a partition key or use GSI
-
-        return dynamoDBMapper.query(Appointments.class, queryExpression);
-
-    }
-
-    public List<Appointments> fetchAppointmentsByDoctorId(String d_id) {
-
-        Appointments appointmentKey = new Appointments();
-        appointmentKey.setD_id(d_id);
-
-        DynamoDBQueryExpression<Appointments> queryExpression = new DynamoDBQueryExpression<Appointments>()
-                .withHashKeyValues(appointmentKey);// doctorId should be a partition key or use GSI
-
-        return dynamoDBMapper.query(Appointments.class, queryExpression);
-
-    }
-
-    public List<Appointments> fetchAllAppointments() {
-        return dynamoDBMapper.scan(Appointments.class, new DynamoDBScanExpression());
-    }
-
-    public Appointments fetchAppointmentById(int id) {
-        return dynamoDBMapper.load(Appointments.class, id);
-    }
-
 }
