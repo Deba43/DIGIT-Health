@@ -37,7 +37,7 @@ public class AppointmentsService {
         }
     }
 
-    public boolean updateAppointment(int a_id, Appointments updatedAppointments) {
+    public boolean rescheduleAppointment(int a_id, Appointments updatedAppointments) {
 
         Appointments existingAppointment = appointmentsRepo.getAppointmentId(a_id);
         if (existingAppointment == null)
