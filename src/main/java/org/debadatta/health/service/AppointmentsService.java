@@ -2,10 +2,6 @@ package org.debadatta.health.service;
 
 import org.debadatta.health.model.Appointments;
 import org.debadatta.health.model.Doctors;
-import org.debadatta.health.model.Patients;
-
-import java.util.Date;
-import java.util.List;
 
 import org.debadatta.health.repo.AppointmentsRepo;
 import org.debadatta.health.repo.DoctorsRepo;

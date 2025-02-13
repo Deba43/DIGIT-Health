@@ -1,6 +1,6 @@
 package org.debadatta.health.repo;
 
-import java.util.List;
+
 
 import org.debadatta.health.model.Appointments;
 import org.springframework.beans.factory.annotation.Autowired;

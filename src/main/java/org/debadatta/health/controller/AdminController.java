@@ -1,6 +1,8 @@
 package org.debadatta.health.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.debadatta.health.model.Appointments;
 import org.debadatta.health.model.Doctors;
@@ -13,6 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -22,6 +28,8 @@ public class AdminController {
 
     @Autowired
     AdminService adminService;
+
+    DynamoDBMapper dynamoDBMapper;
 
     @GetMapping("/getAllpatients")
     public ResponseEntity<List<Patients>> getAllpatients() {
@@ -100,6 +108,19 @@ public class AdminController {
         } else {
             return ResponseEntity.notFound().build(); // Return 404 if appointment not found
         }
+    }
+
+    public List<Patients> getPatientsByDoctorId(String doctorId) {
+        Map<String, AttributeValue> eav = new HashMap<>();
+        eav.put(":doctorId", new AttributeValue().withS(doctorId));
+
+        DynamoDBQueryExpression<Patients> queryExpression = new DynamoDBQueryExpression<Patients>()
+                .withIndexName("d_id-index") // Using the GSI
+                .withConsistentRead(false) // Must be false for GSIs
+                .withKeyConditionExpression("d_id = :doctorId")
+                .withExpressionAttributeValues(eav);
+
+        return dynamoDBMapper.query(Patients.class, queryExpression);
     }
 
 }
