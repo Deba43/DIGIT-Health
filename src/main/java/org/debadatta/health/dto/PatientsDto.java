@@ -24,7 +24,7 @@ public class PatientsDto {
     private String password;
 
     @NotNull(message = "Age can't be null")
-    private Integer age;
+    private String age;
 
     @NotNull(message = "Disease can't be null")
     private String disease;

@@ -33,7 +33,7 @@ public class DoctorsDto {
     private String phone_no;
 
     @NotNull(message = "Age can't be null")
-    private int age;
+    private String age;
 
     @NotNull(message = "Specialization status cannot be null")
     private String specialization;

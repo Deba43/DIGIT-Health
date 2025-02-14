@@ -52,7 +52,7 @@ public class Doctors extends User {
 
     @DynamoDBAttribute(attributeName = "age")
     @NotNull(message = "Age can't be null")
-    private int age;
+    private String age;
 
     @DynamoDBAttribute(attributeName = "specialization")
     @NotNull(message = "Specialization status cannot be null")

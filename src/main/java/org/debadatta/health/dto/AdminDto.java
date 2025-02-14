@@ -17,8 +17,7 @@ public class AdminDto {
 
     @NotNull(message = "Password can't be null")
     @Size(min = 8, message = "Your Password must be at least 8 characters long")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", 
-             message = "Password must contain at least one letter, one number, and one special character")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", message = "Password must contain at least one letter, one number, and one special character")
     private String password;
 
     @NotNull(message = "Role can't be null")
@@ -33,5 +32,5 @@ public class AdminDto {
     private String phone_no;
 
     @NotNull(message = "Age can't be null")
-    private int age;
+    private String age;
 }

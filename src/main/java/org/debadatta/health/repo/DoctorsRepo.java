@@ -48,7 +48,7 @@ public class DoctorsRepo {
         Doctors existingDoctor = dynamoDBMapper.load(Doctors.class, d_id);
         if (doctor.getName() != null)
             existingDoctor.setName(doctor.getName());
-        if (doctor.getAge() != 0)
+        if (doctor.getAge() != null && !doctor.getAge().isEmpty() && Integer.parseInt(doctor.getAge()) != 0)
             existingDoctor.setAge(doctor.getAge());
         if (doctor.getSpecialization() != null)
             existingDoctor.setSpecialization(doctor.getSpecialization());

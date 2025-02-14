@@ -54,5 +54,5 @@ public class Admin extends User {
 
     @DynamoDBAttribute(attributeName = "age")
     @NotNull(message = "Age can't be null")
-    private int age;
+    private String age;
 }
