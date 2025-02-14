@@ -50,8 +50,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 userDetails.put("phone", user.getPhone_no());
                 userDetails.put("role", user.getRole());
                 userDetails.put("age", user.getAge());
-                userDetails.put("createdAt", user.getCreatedAt());
-                userDetails.put("updatedAt", user.getUpdatedAt());
+
             });
         } else if ("ROLE_DOCTOR".equals(role) && id != null) {
             Optional<Doctors> userObj = userService.findDoctorById(id);
@@ -64,8 +63,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 userDetails.put("specialization", user.getSpecialization());
                 userDetails.put("experience", user.getExperience());
                 userDetails.put("availability", user.getAvailability());
-                userDetails.put("createdAt", user.getCreatedAt());
-                userDetails.put("updatedAt", user.getUpdatedAt());
+
             });
         } else if ("ROLE_PATIENT".equals(role) && id != null) {
             Optional<Patients> userObj = userService.findPatientById(id);
@@ -77,8 +75,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 userDetails.put("gender", user.getGender());
                 userDetails.put("disease", user.getDisease());
                 userDetails.put("address", user.getAddress());
-                userDetails.put("createdAt", user.getCreatedAt());
-                userDetails.put("updatedAt", user.getUpdatedAt());
+
             });
         }
 
