@@ -9,6 +9,7 @@ import org.debadatta.health.model.Patients;
 import org.debadatta.health.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,7 +39,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 .findFirst()
                 .orElse(null);
 
-        Long id = userService.findByEmail(username).getId();
+        Long id = userService.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username))
+                .getId();
+
         Map<String, Object> userDetails = new HashMap<>();
 
         if ("ROLE_ADMIN".equals(role) && id != null) {

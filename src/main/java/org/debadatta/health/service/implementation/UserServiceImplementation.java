@@ -17,22 +17,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImplementation implements UserService, UserDetailsService {
+public class UserServiceImplementation implements UserService, UserDetails {
 
     @Autowired
     private UserRepo userRepo;
     private PasswordEncoder passwordEncoder;
+
     private final DynamoDBMapper dynamoDBMapper;
 
     @Autowired
@@ -43,15 +45,12 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
     @Override
     public void saveUser(User user) {
-        userRepo.save(user);
+        dynamoDBMapper.save(user);
     }
 
-    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepo.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with email: " + email);
-        }
+        User user = findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
         String role = user instanceof Admin ? "ADMIN" : (user instanceof Doctors ? "DOCTOR" : "PATIENT");
 
@@ -119,24 +118,9 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         }
     }
 
-    @Override
-    public List<User> getAllUsers() {
-        return userRepo.findAll();
-    }
-
-    @Override
-    public User findByEmail(String email) {
-        return userRepo.findByEmail(email);
-    }
-
-    @Override
-    public Optional<User> findUserById(Long id) {
-        return userRepo.findById(id);
-    }
-
-    @Override
-    public void deleteUserById(Long id) {
-        userRepo.deleteById(id);
+    public Optional<User> findByEmail(String email) {
+        List<User> users = dynamoDBMapper.scan(User.class, new DynamoDBScanExpression());
+        return users.stream().filter(user -> user.getEmail().equals(email)).findFirst();
     }
 
     @Override
@@ -154,6 +138,24 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     public Optional<Patients> findPatientById(Long id) {
         return userRepo.findPatientById(id);
 
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    }
+
+    @Override
+    public String getPassword() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
+
+    @Override
+    public String getUsername() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
     }
 
 }

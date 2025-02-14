@@ -1,6 +1,5 @@
 package org.debadatta.health.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.debadatta.health.dto.AdminDto;
@@ -21,13 +20,7 @@ public interface UserService {
 
     void savePatient(PatientsDto patientDTO);
 
-    List<User> getAllUsers();
-
-    User findByEmail(String email);
-
-    Optional<User> findUserById(Long id);
-
-    void deleteUserById(Long id);
+    Optional<User> findByEmail(String email);
 
     Optional<Admin> findAdminById(Long id);
 
