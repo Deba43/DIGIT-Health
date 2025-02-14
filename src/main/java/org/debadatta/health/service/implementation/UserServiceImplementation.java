@@ -1,7 +1,5 @@
 package org.debadatta.health.service.implementation;
 
-import jakarta.transaction.Transactional;
-
 import org.debadatta.health.dto.AdminDto;
 import org.debadatta.health.dto.DoctorsDto;
 import org.debadatta.health.dto.PatientsDto;
@@ -62,7 +60,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     @Override
-    @Transactional
+
     public void saveAdmin(AdminDto adminDTO) {
         try {
             Admin admin = new Admin();
@@ -80,7 +78,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     @Override
-    @Transactional
+
     public void saveDoctor(DoctorsDto doctorDTO) {
         try {
             Doctors doc = new Doctors();
@@ -100,7 +98,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     @Override
-    @Transactional
+
     public void savePatient(PatientsDto patientDTO) {
         try {
             Patients pat = new Patients();
