@@ -20,16 +20,16 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.core.GrantedAuthority;
+
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImplementation implements UserService, UserDetails {
+public class UserServiceImplementation implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepo userRepo;
@@ -138,24 +138,6 @@ public class UserServiceImplementation implements UserService, UserDetails {
     public Optional<Patients> findPatientById(Long id) {
         return userRepo.findPatientById(id);
 
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
-    }
-
-    @Override
-    public String getPassword() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
-    }
-
-    @Override
-    public String getUsername() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
     }
 
 }

@@ -1,7 +1,6 @@
 package org.debadatta.health.config;
 
 import org.debadatta.health.security.CustomAuthenticationSuccessHandler;
-import org.debadatta.health.service.implementation.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
