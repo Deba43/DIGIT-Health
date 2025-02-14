@@ -66,9 +66,7 @@ public class Doctors extends User {
     @NotNull(message = "Availability status cannot be null")
     private Map<Date, List<String>> availability;
 
-    
-
-    public boolean isAvailable(Date a_date, String a_time) {
+    public boolean isAvailable(String a_date, String a_time) {
 
         if (availability.containsKey(a_date)) {
             List<String> availableTimes = availability.get(a_date);

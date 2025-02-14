@@ -42,7 +42,7 @@ public class Appointments {
 
     @DynamoDBAttribute(attributeName = "a_date")
     @NotNull(message = "Appointment date can't be null")
-    private Date a_date;
+    private String a_date;
 
     @DynamoDBAttribute(attributeName = "a_time")
     @NotNull(message = "Appointment time can't be null")
