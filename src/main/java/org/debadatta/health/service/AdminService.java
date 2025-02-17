@@ -7,7 +7,9 @@ import org.debadatta.health.model.Doctors;
 import org.debadatta.health.model.Patients;
 import org.debadatta.health.repo.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdminService {
 
     @Autowired
