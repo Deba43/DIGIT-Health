@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PatientsDto {
 
-    @NotNull(message = "Doctor ID can't be null")
-    private String d_id;
 
     @NotNull(message = "Name can't be null")
     private String name;

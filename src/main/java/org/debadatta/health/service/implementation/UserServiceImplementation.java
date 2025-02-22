@@ -89,7 +89,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
             doc.setAge(doctorDTO.getAge());
             doc.setSpecialization(doctorDTO.getSpecialization());
             doc.setExperience(doctorDTO.getExperience());
-            doc.setAvailability(doctorDTO.getAvailability());
+           
 
             dynamoDBMapper.save(doc);
         } catch (Exception e) {

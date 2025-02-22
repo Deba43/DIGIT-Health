@@ -52,10 +52,9 @@ public class DoctorsRepo {
             existingDoctor.setAge(doctor.getAge());
         if (doctor.getSpecialization() != null)
             existingDoctor.setSpecialization(doctor.getSpecialization());
-        if (doctor.getExperience() != 0)
+        if (doctor.getExperience() != null && !doctor.getExperience().isEmpty()
+                && Integer.parseInt(doctor.getExperience()) != 0)
             existingDoctor.setExperience(doctor.getExperience());
-        if (doctor.getAvailability() != null)
-            existingDoctor.setAvailability(doctor.getAvailability());
 
         dynamoDBMapper.save(existingDoctor);
 

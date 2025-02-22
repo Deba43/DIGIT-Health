@@ -30,7 +30,6 @@ public class DynamoDBConfig {
     @Value("${aws.dynamodb.sessionkey}")
     private String dynamodbSessionKey;
 
-
     @Bean
     public DynamoDBMapper dynamoDBMapper() {
         return new DynamoDBMapper(buildAmazonDynamoDB());

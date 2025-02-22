@@ -39,8 +39,6 @@ public class DoctorsDto {
     private String specialization;
 
     @NotNull(message = "Experience can't be null")
-    private int experience;
+    private String experience;
 
-    @NotNull(message = "Availability status cannot be null")
-    private Map<Date, List<String>> availability;
 }
