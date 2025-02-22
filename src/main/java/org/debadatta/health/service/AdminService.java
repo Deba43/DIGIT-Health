@@ -1,7 +1,9 @@
 package org.debadatta.health.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.debadatta.health.model.Admin;
 import org.debadatta.health.model.Appointments;
 import org.debadatta.health.model.Doctors;
 import org.debadatta.health.model.Patients;
@@ -9,11 +11,16 @@ import org.debadatta.health.repo.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+
 @Service
 public class AdminService {
 
     @Autowired
     AdminRepo adminRepo;
+    @Autowired
+    DynamoDBMapper dynamoDBMapper;
 
     public List<Patients> getAllPatients() {
         return adminRepo.getAllPatients();
@@ -48,6 +55,10 @@ public class AdminService {
 
     public Appointments getAppointmentById(int id) {
         return adminRepo.fetchAppointmentById(id);
+    }
+    public Optional<Admin> findByEmail(String email) {
+        List<Admin> admin = dynamoDBMapper.scan(Admin.class, new DynamoDBScanExpression());
+        return admin.stream().filter(user -> user.getEmail().equals(email)).findFirst();
     }
 
 }

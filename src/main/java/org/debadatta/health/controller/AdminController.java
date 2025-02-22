@@ -115,8 +115,8 @@ public class AdminController {
         eav.put(":doctorId", new AttributeValue().withS(doctorId));
 
         DynamoDBQueryExpression<Patients> queryExpression = new DynamoDBQueryExpression<Patients>()
-                .withIndexName("d_id-index") // Using the GSI
-                .withConsistentRead(false) // Must be false for GSIs
+                .withIndexName("d_id-index") 
+                .withConsistentRead(false) 
                 .withKeyConditionExpression("d_id = :doctorId")
                 .withExpressionAttributeValues(eav);
 

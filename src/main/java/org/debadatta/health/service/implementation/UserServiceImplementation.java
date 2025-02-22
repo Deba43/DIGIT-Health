@@ -89,7 +89,6 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
             doc.setAge(doctorDTO.getAge());
             doc.setSpecialization(doctorDTO.getSpecialization());
             doc.setExperience(doctorDTO.getExperience());
-           
 
             dynamoDBMapper.save(doc);
         } catch (Exception e) {
@@ -113,6 +112,18 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
             dynamoDBMapper.save(pat);
         } catch (Exception e) {
             throw new RuntimeException("Could not create patient: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void saveIfNotExists(String email, String encodedPassword, String role) {
+        User existingUser = dynamoDBMapper.load(User.class, email);
+        if (existingUser == null) {
+            User newUser = new User();
+            newUser.setEmail(email);
+            newUser.setRole(role);
+            newUser.setPassword(encodedPassword);
+            dynamoDBMapper.save(newUser);
         }
     }
 

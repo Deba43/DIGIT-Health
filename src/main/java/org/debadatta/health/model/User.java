@@ -43,4 +43,7 @@ public class User {
 	@Pattern(regexp = "^[0-9]{10}$", message = "Mobile Number must be 10 digits")
 	private String phone_no;
 
+	@DynamoDBAttribute(attributeName = "role")
+    private String role;
+
 }

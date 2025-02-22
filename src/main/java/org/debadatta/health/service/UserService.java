@@ -28,4 +28,6 @@ public interface UserService {
 
     Optional<Patients> findPatientById(Long id);
 
+    void saveIfNotExists(String email, String password, String role);
+
 }
