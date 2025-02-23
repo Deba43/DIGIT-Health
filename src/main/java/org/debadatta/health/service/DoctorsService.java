@@ -21,7 +21,7 @@ public class DoctorsService {
     @Autowired
     private DoctorsRepo doctorsRepo;
     @Autowired
-    DynamoDBMapper dynamoDBMapper;
+    private DynamoDBMapper dynamoDBMapper;
 
     public String createDoctors(Doctors doctors) {
         return doctorsRepo.createDoctors(doctors);

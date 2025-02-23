@@ -29,18 +29,54 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    DynamoDBMapper dynamoDBMapper;
+    @Autowired
+    private final DynamoDBMapper dynamoDBMapper;
 
-    @GetMapping("/getAllpatients")
+    @GetMapping("/getAllPatients")
     public ResponseEntity<List<Patients>> getAllpatients() {
         List<Patients> patients = adminService.getAllPatients();
         return ResponseEntity.ok(patients);
+    }
+
+    @GetMapping("/getPatientsByDisease/{disease}")
+    public ResponseEntity<?> getPatientsByDisease(@PathVariable String disease) {
+        try {
+            List<Patients> patients = adminService.getPatientsByDisease(disease);
+            if (patients.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(patients);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body("Error fetching Patients: " + e.getMessage());
+        }
     }
 
     @GetMapping("/getPatientsById/{p_id}")
     public ResponseEntity<Patients> getPatientsById(@PathVariable String p_id) {
         Patients patients = adminService.getPatientsById(p_id);
         return ResponseEntity.ok(patients);
+    }
+
+    @GetMapping("/getAllDoctors")
+    public ResponseEntity<List<Doctors>> getAllDoctors() {
+        List<Doctors> doctors = adminService.getAllDoctors();
+        return ResponseEntity.ok(doctors);
+
+    }
+
+    @GetMapping("/getDoctorsBySpecialization/{specialization}")
+    public ResponseEntity<?> getDoctorsBySpecialization(@PathVariable String specialization) {
+        try {
+            List<Doctors> doc = adminService.getDoctorsBySpecialization(specialization);
+            if (doc.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(doc);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body("Error fetching Doctors: " + e.getMessage());
+        }
     }
 
     @GetMapping("/getDoctorsById/{d_id}")
@@ -51,13 +87,6 @@ public class AdminController {
         } else {
             return ResponseEntity.notFound().build();
         }
-
-    }
-
-    @GetMapping("/getAllDoctors")
-    public ResponseEntity<List<Doctors>> getAllDoctors() {
-        List<Doctors> doctors = adminService.getAllDoctors();
-        return ResponseEntity.ok(doctors);
 
     }
 
@@ -115,8 +144,8 @@ public class AdminController {
         eav.put(":doctorId", new AttributeValue().withS(doctorId));
 
         DynamoDBQueryExpression<Patients> queryExpression = new DynamoDBQueryExpression<Patients>()
-                .withIndexName("d_id-index") 
-                .withConsistentRead(false) 
+                .withIndexName("d_id-index")
+                .withConsistentRead(false)
                 .withKeyConditionExpression("d_id = :doctorId")
                 .withExpressionAttributeValues(eav);
 

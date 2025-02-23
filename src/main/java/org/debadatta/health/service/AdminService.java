@@ -19,15 +19,32 @@ public class AdminService {
 
     @Autowired
     AdminRepo adminRepo;
+    private final DynamoDBMapper dynamoDBMapper;
+
     @Autowired
-    DynamoDBMapper dynamoDBMapper;
+    public AdminService(DynamoDBMapper dynamoDBMapper) {
+        this.dynamoDBMapper = dynamoDBMapper;
+    }
 
     public List<Patients> getAllPatients() {
         return adminRepo.getAllPatients();
     }
 
+    public List<Patients> getPatientsByDisease(String disease) {
+        return adminRepo.getPatientsByDisease(disease);
+    }
+
     public Patients getPatientsById(String p_id) {
         return adminRepo.getPatientsById(p_id);
+    }
+
+    public List<Doctors> getDoctorsBySpecialization(String specialization) {
+        return adminRepo.getDoctorsBySpecialization(specialization);
+
+    }
+
+    public List<Doctors> getAllDoctors() {
+        return adminRepo.getAllDoctors();
     }
 
     public Doctors getDoctorsById(String d_id) {
@@ -35,9 +52,6 @@ public class AdminService {
 
     }
 
-    public List<Doctors> getAllDoctors() {
-        return adminRepo.getAllDoctors();
-    }
 
     public List<Appointments> getAllAppointments() {
         return adminRepo.fetchAllAppointments();
@@ -56,6 +70,7 @@ public class AdminService {
     public Appointments getAppointmentById(int id) {
         return adminRepo.fetchAppointmentById(id);
     }
+
     public Optional<Admin> findByEmail(String email) {
         List<Admin> admin = dynamoDBMapper.scan(Admin.class, new DynamoDBScanExpression());
         return admin.stream().filter(user -> user.getEmail().equals(email)).findFirst();

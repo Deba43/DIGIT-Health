@@ -31,7 +31,6 @@ public class DoctorsController {
         return doctorsService.createDoctors(doctors);
     }
 
-
     @GetMapping("/getPatientsByDisease/{disease}")
     public ResponseEntity<List<Patients>> getPatientsByDisease(@PathVariable String disease) {
         List<Patients> patients = doctorsService.getPatientsByDisease(disease);
@@ -41,10 +40,9 @@ public class DoctorsController {
     @PutMapping("/updateDoctors/{d_id}")
     public Doctors updateDoctors(@PathVariable String d_id, @RequestBody Doctors doctors) {
         return doctorsService.updateDoctors(d_id, doctors);
-
     }
 
-    @DeleteMapping("/deleteDoctors{d_id}")
+    @DeleteMapping("/deleteDoctors/{d_id}")
     public String deleteDoctors(@PathVariable String d_id) {
         return doctorsService.deleteDoctors(d_id);
     }

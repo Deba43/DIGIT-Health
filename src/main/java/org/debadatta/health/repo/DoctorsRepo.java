@@ -7,7 +7,9 @@ import java.util.Map;
 import org.debadatta.health.model.Doctors;
 import org.debadatta.health.model.Patients;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
@@ -20,12 +22,12 @@ import lombok.AllArgsConstructor;
 public class DoctorsRepo {
 
     @Autowired
-    final private DynamoDBMapper dynamoDBMapper;
+    private DynamoDBMapper dynamoDBMapper;
 
     public String createDoctors(Doctors doctors) {
 
         dynamoDBMapper.save(doctors);
-        return doctors.getD_id();
+        return "Doctor created successfully";
     }
 
     public Doctors getDoctorsById(String d_id) {
@@ -44,22 +46,29 @@ public class DoctorsRepo {
     }
 
     public Doctors updateDoctors(String d_id, Doctors doctor) {
-
+        System.out.println("Updating doctor with ID: " + d_id);
         Doctors existingDoctor = dynamoDBMapper.load(Doctors.class, d_id);
+        if (existingDoctor == null) {
+            System.out.println("Doctor not found: " + d_id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Doctor not found");
+        }
+        System.out.println("Existing doctor data: " + existingDoctor);
+
         if (doctor.getName() != null)
             existingDoctor.setName(doctor.getName());
-        if (doctor.getAge() != null && !doctor.getAge().isEmpty() && Integer.parseInt(doctor.getAge()) != 0)
+        if (doctor.getEmail() != null)
+            existingDoctor.setEmail(doctor.getEmail());
+        if (doctor.getPhone_no() != null)
+            existingDoctor.setPhone_no(doctor.getPhone_no());
+        if (doctor.getAge() != null && !doctor.getAge().isEmpty())
             existingDoctor.setAge(doctor.getAge());
         if (doctor.getSpecialization() != null)
             existingDoctor.setSpecialization(doctor.getSpecialization());
-        if (doctor.getExperience() != null && !doctor.getExperience().isEmpty()
-                && Integer.parseInt(doctor.getExperience()) != 0)
+        if (doctor.getExperience() != null)
             existingDoctor.setExperience(doctor.getExperience());
-
+        System.out.println("Updated doctor data: " + existingDoctor);
         dynamoDBMapper.save(existingDoctor);
-
         return dynamoDBMapper.load(Doctors.class, d_id);
-
     }
 
     public String deleteDoctors(String d_id) {

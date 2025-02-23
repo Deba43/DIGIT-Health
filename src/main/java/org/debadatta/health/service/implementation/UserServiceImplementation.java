@@ -121,8 +121,8 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         if (existingUser == null) {
             User newUser = new User();
             newUser.setEmail(email);
-            newUser.setRole(role);
             newUser.setPassword(encodedPassword);
+            newUser.setRole(role);
             dynamoDBMapper.save(newUser);
         }
     }
