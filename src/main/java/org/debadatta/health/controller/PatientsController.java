@@ -49,16 +49,14 @@ public class PatientsController {
         boolean isBooked = appointmentsService.bookAppointment(appointments);
 
         if (isBooked) {
-            return ResponseEntity.ok("Your Appointment Booked Successfully");
-
+            return ResponseEntity.ok("Your appointment has been booked successfully.");
         } else {
-            return ResponseEntity.badRequest().body("Doctor is unavailable at the requested time!");
+            return ResponseEntity.badRequest().body("Invalid appointment request!");
         }
-
     }
 
     @PutMapping("/rescheduleAppointment/{a_id}")
-    public ResponseEntity<String> rescheduleAppointment(@PathVariable int a_id,
+    public ResponseEntity<String> rescheduleAppointment(@PathVariable String a_id,
             @RequestBody Appointments updatedAppointment) {
 
         boolean isUpdated = appointmentsService.rescheduleAppointment(a_id, updatedAppointment);
@@ -66,22 +64,20 @@ public class PatientsController {
         if (isUpdated) {
             return ResponseEntity.ok("Appointment rescheduled successfully");
         } else {
-            return ResponseEntity.badRequest().body("Doctor is unavailable or appointment could not be updated");
+            return ResponseEntity.badRequest().body("Appointment could not be updated!");
         }
-
     }
 
-    @DeleteMapping("/cancelAppointments/{a_id}")
-    public ResponseEntity<String> cancelAppointment(@PathVariable int a_id) {
+    @DeleteMapping("/cancelAppointment/{a_id}")
+    public ResponseEntity<String> cancelAppointment(@PathVariable String a_id) {
 
-        boolean isCancel = appointmentsService.cancelAppointment(a_id);
+        boolean isCancelled = appointmentsService.cancelAppointment(a_id);
 
-        if (isCancel) {
-            return ResponseEntity.ok("Your appointment cancelled successfully");
+        if (isCancelled) {
+            return ResponseEntity.ok("Your appointment has been cancelled successfully.");
         } else {
-            return ResponseEntity.badRequest().body("Your appointment can't be cancelled");
+            return ResponseEntity.badRequest().body("Appointment not found or cannot be cancelled.");
         }
-
     }
 
 }

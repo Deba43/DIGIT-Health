@@ -29,9 +29,6 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @Autowired
-    private final DynamoDBMapper dynamoDBMapper;
-
     @GetMapping("/getAllPatients")
     public ResponseEntity<List<Patients>> getAllpatients() {
         List<Patients> patients = adminService.getAllPatients();
@@ -97,59 +94,23 @@ public class AdminController {
         if (appointments != null && !appointments.isEmpty()) {
             return ResponseEntity.ok(appointments);
         } else {
-            return ResponseEntity.noContent().build(); // Return 204 if no appointments found
+            return ResponseEntity.noContent().build(); 
         }
     }
 
-    @GetMapping("/getAppointmentByPatientId/{p_id}")
-    public ResponseEntity<List<Appointments>> getAppointmentByPatientId(@PathVariable String p_id) {
 
-        List<Appointments> appointments = adminService.getAppointmentByPatientId(p_id);
-
-        if (appointments != null && !appointments.isEmpty()) {
-            return ResponseEntity.ok(appointments);
-        } else {
-            return ResponseEntity.noContent().build();
-        }
-
-    }
-
-    @GetMapping("/getAppointmentByDoctorId/{d_id}")
-    public ResponseEntity<List<Appointments>> getAppointmentByDoctorId(@PathVariable String d_id) {
-
-        List<Appointments> appointments = adminService.getAppointmentByDoctorId(d_id);
-
-        if (appointments != null && !appointments.isEmpty()) {
-            return ResponseEntity.ok(appointments);
-        } else {
-            return ResponseEntity.noContent().build();
-        }
-
-    }
 
     @GetMapping("/getAppointmentById/{id}")
-    public ResponseEntity<Appointments> getAppointmentById(@PathVariable int id) {// the id is for the URL path of the
-                                                                                  // incoming HTTP request
+    public ResponseEntity<Appointments> getAppointmentById(@PathVariable String id) {
+                                                                                  
         Appointments appointment = adminService.getAppointmentById(id);
 
         if (appointment != null) {
             return ResponseEntity.ok(appointment);
         } else {
-            return ResponseEntity.notFound().build(); // Return 404 if appointment not found
+            return ResponseEntity.notFound().build(); 
         }
     }
 
-    public List<Patients> getPatientsByDoctorId(String doctorId) {
-        Map<String, AttributeValue> eav = new HashMap<>();
-        eav.put(":doctorId", new AttributeValue().withS(doctorId));
-
-        DynamoDBQueryExpression<Patients> queryExpression = new DynamoDBQueryExpression<Patients>()
-                .withIndexName("d_id-index")
-                .withConsistentRead(false)
-                .withKeyConditionExpression("d_id = :doctorId")
-                .withExpressionAttributeValues(eav);
-
-        return dynamoDBMapper.query(Patients.class, queryExpression);
-    }
 
 }

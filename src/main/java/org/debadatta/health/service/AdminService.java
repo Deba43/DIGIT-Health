@@ -57,17 +57,8 @@ public class AdminService {
         return adminRepo.fetchAllAppointments();
     }
 
-    public List<Appointments> getAppointmentByPatientId(String p_id) {
 
-        return adminRepo.fetchAppointmentsByPatientId(p_id);
-    }
-
-    public List<Appointments> getAppointmentByDoctorId(String d_id) {
-
-        return adminRepo.fetchAppointmentsByDoctorId(d_id);
-    }
-
-    public Appointments getAppointmentById(int id) {
+    public Appointments getAppointmentById(String id) {
         return adminRepo.fetchAppointmentById(id);
     }
 

@@ -1,7 +1,5 @@
 package org.debadatta.health.repo;
 
-
-
 import org.debadatta.health.model.Appointments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,7 +19,7 @@ public class AppointmentsRepo {
         dynamoDBMapper.save(appointments);
     }
 
-    public Appointments getAppointmentId(int a_id) {
+    public Appointments getAppointmentById(String a_id) {
         return dynamoDBMapper.load(Appointments.class, a_id);
     }
 
